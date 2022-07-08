@@ -1,4 +1,4 @@
-let goal = Math.floor(Math.random() * 100) + 1
+let goal = 0
 let guess = 0
 let minNum = 0
 let maxNum = 100
@@ -9,6 +9,7 @@ const inputGuess = document.querySelector('#inputGuess')
 const delBtn = document.querySelector('#del')
 const checkBtn = document.querySelector('#check')
 const resetBtn = document.querySelector('#reset')
+
 numberBtns.forEach(btn => {
     btn.addEventListener('click', (event) => {
         InsertNumber(event, inputGuess, 'value')
@@ -24,9 +25,9 @@ checkBtn.addEventListener('click', () => {
 })
 resetBtn.addEventListener('click', ResetGame)
 
-// 
-document.querySelector('#goal').innerText = `${goal}`
-//
+window.onload = function() {
+    GameInitialize()
+}
 
 function InsertNumber(event, insert, insertProp) {
     insert[insertProp] += Number(event.target.innerText)
@@ -62,6 +63,7 @@ function NumberGuess() {
         (guess < goal) ? minNum = guess : maxNum = guess
         DisplayText(displayRange, 'innerText', `${minNum} ~ ${maxNum}`)
         SetEmptyString(inputGuess, 'value')
+        SetEmptyString(inputGuess, 'placeholder')
         return
     }
     else {
@@ -72,13 +74,15 @@ function NumberGuess() {
         numberBtns.forEach(btn => btn.setAttribute('disabled', true))
     }
 }
-
 function ResetGame() {
     checkBtn.removeAttribute('disabled')
     delBtn.removeAttribute('disabled')
     inputGuess.removeAttribute('disabled')
     numberBtns.forEach(btn => btn.removeAttribute('disabled'))
     
+    GameInitialize()
+}
+function GameInitialize() {
     goal = Math.floor(Math.random() * 100) + 1
     minNum = 0
     maxNum = 100
