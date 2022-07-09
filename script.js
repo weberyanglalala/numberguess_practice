@@ -23,7 +23,9 @@ delBtn.addEventListener('click', () => {
 checkBtn.addEventListener('click', () => {
     CheckValid()
 })
-resetBtn.addEventListener('click', ResetGame)
+resetBtn.addEventListener('click', ()=> {
+    ResetGame()
+})
 
 window.onload = function() {
     GameInitialize()
@@ -79,15 +81,13 @@ function ResetGame() {
     delBtn.removeAttribute('disabled')
     inputGuess.removeAttribute('disabled')
     numberBtns.forEach(btn => btn.removeAttribute('disabled'))
-    
     GameInitialize()
 }
 function GameInitialize() {
     goal = Math.floor(Math.random() * 100) + 1
     minNum = 0
     maxNum = 100
-
-    DisplayText(displayRange, 'InnerText', `${minNum} ~ ${maxNum}`)
+    displayRange.innerHTML = `${minNum} ~ ${maxNum}`
     SetEmptyString(inputGuess, 'InnerText')
     SetEmptyString(inputGuess, 'placeholder')
     SetEmptyString(inputGuess, 'value')
